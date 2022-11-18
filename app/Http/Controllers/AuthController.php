@@ -28,10 +28,13 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|unique:users',
-            'phone' => 'required|unique:users',
-        ]);
+        $checkEmail = Users::where('email', $request->email)->first();
+        $checkPhone = Users::where('phone', $request->phone)->first();
+        if ($checkEmail) {
+            return response()->json(['alert' => 'البريد الإلكتروني موجود مسبقا'], 401);
+        } elseif ($checkPhone) {
+            return response()->json(['alert' => 'رقم الهاتف موجود مسبقا'], 401);
+        }
         $user = Users::create([
             'name' => $request->name,
             'email' => $request->email,
