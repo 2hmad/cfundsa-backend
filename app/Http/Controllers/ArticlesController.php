@@ -84,6 +84,10 @@ class ArticlesController extends Controller
         ]);
         // return $add_comment with user
         $add_comment->user = $user;
+        // increase article comment
+        $article = Articles::where('id', $request->article_id)->first();
+        $article->comments = $article->comments + 1;
+        $article->save();
         return $add_comment;
     }
     public function createArticle(Request $request)

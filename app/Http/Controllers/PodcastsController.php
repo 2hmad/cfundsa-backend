@@ -49,7 +49,7 @@ class PodcastsController extends Controller
             'tags' => $request->tags,
             'views' => 0,
             'video_url' => $request->video,
-            'thumbnail' => $image_name,
+            'thumbnail' => "storage/podcasts/" . $image_name,
         ]);
     }
     public function deletePodcast($id)
