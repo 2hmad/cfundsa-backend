@@ -6,6 +6,7 @@ use App\Models\Followers;
 use App\Models\PhoneVerification;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 
 class UserController extends Controller
 {
@@ -104,10 +105,15 @@ class UserController extends Controller
     {
         $user = Users::where('token', $request->header('Authorization'))->first();
         if ($user !== null) {
-            PhoneVerification::where('user_id', $user->id)->update([
+            $generate_code = PhoneVerification::where('user_id', $user->id)->update([
                 'code' => rand(1000, 9999),
                 'expire' => now()->addMinutes(30),
             ]);
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_AUTH_TOKEN");
+            $twilio_number = getenv("TWILIO_NUMBER");
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($user->phone, ['from' => $twilio_number, 'body' => 'كود التحقق الخاص بك هو ' . $generate_code->code . '\n صلاحية الكود 30 دقيقة فقط']);
             return response()->json([
                 'alert' => 'تم إعادة إرسال الكود بنجاح'
             ], 200);
