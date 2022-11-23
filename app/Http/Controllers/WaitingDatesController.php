@@ -17,10 +17,11 @@ class WaitingDatesController extends Controller
         if ($date == 'today') {
             return Appointments::where('date', date('Y-m-d'))->with('company')->get();
         } else if ($date == 'week') {
-            // get appointments for this week from today to 7 days later
             $start = date('Y-m-d');
             $end = date('Y-m-d', strtotime('-7 days'));
-            return Appointments::whereBetween('date', [$start, $end])->with('company')->get();
+            // get appointments when date from start to end date
+
+            return Appointments::whereBetween('date', [$end, $start])->with('company')->get();
         } else if ($date == 'month') {
             return Appointments::whereMonth('date', date('m'))->with('company')->get();
         }
