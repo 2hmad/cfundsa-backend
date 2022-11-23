@@ -11,7 +11,6 @@ class PodcastsController extends Controller
     public function getPodcasts()
     {
         $podcasts = Podcasts::orderBy('id', 'DESC')->paginate(10);
-        // return short content
         $podcasts->getCollection()->transform(function ($podcast) {
             $podcast->content = substr($podcast->content, 0, 200) . '...';
             return $podcast;

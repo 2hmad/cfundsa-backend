@@ -32,15 +32,15 @@ class ArticlesController extends Controller
             $article->content = substr($article->content, 0, 200) . '...';
             return $article;
         });
-        $appointments = Articles::orderBy('id', 'DESC')->where('article_type', 'appointment')->with('comments')->paginate(6);
-        $appointments->getCollection()->transform(function ($appointment) {
-            $appointment->content = substr($appointment->content, 0, 200) . '...';
-            return $appointment;
+        $news = Articles::orderBy('id', 'DESC')->where('article_type', 'news')->with('comments')->paginate(6);
+        $news->getCollection()->transform(function ($news) {
+            $news->content = substr($news->content, 0, 200) . '...';
+            return $news;
         });
         // extract articles and appointments from article_type
         return [
             'articles' => $articles,
-            'appointments' => $appointments,
+            'news' => $news,
         ];
     }
     public function getArticle($id)
@@ -52,8 +52,8 @@ class ArticlesController extends Controller
     }
     public function getMostArticles()
     {
-        $mostViews = Articles::orderBy('views', 'DESC')->limit(10)->get();
-        $mostComments = Articles::orderBy('comments', 'DESC')->limit(10)->get();
+        $mostViews = Articles::orderBy('views', 'DESC')->limit(6)->get();
+        $mostComments = Articles::orderBy('comments', 'DESC')->limit(6)->get();
         $mostViews = $mostViews->map(function ($article) {
             return [
                 'title' => $article->title,

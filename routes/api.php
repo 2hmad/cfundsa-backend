@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\DealsController;
@@ -51,10 +52,11 @@ Route::post('article/add-comment', [ArticlesController::class, 'addComment'])->m
 Route::get('most-articles', [ArticlesController::class, 'getMostArticles']);
 
 Route::get('waiting-dates', [WaitingDatesController::class, 'getWaitingDates']);
+Route::get('waiting-dates/{date}', [WaitingDatesController::class, 'getWaitingDatesByDate']);
 
 Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
 
-Route::get('projects', [ProjectsController::class, 'getProjects']);
+Route::get('projects/limited', [ProjectsController::class, 'getLimitedProjects']);
 
 Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
 
@@ -128,6 +130,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('podcasts', [PodcastsController::class, 'getAllPodcasts']);
     Route::post('podcasts', [PodcastsController::class, 'createPodcasts']);
     Route::delete('podcasts/{id}', [PodcastsController::class, 'deletePodcast']);
+
+    Route::get('categories', [CategoriesController::class, 'getCategories']);
+    Route::post('categories', [CategoriesController::class, 'createCategories']);
+    Route::delete('categories/{id}', [CategoriesController::class, 'deleteCategories']);
+
+    Route::get('projects', [ProjectsController::class, 'getProjects']);
+    Route::post('projects', [ProjectsController::class, 'createProjects']);
+    Route::delete('projects/{id}', [ProjectsController::class, 'deleteProjects']);
 
     Route::get('users', [UserController::class, 'getAllUsers']);
     Route::delete('users/{id}', [UserController::class, 'deleteUser']);
