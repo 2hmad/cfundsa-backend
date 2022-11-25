@@ -53,7 +53,8 @@ class AuthController extends Controller
         $auth_token = getenv("TWILIO_AUTH_TOKEN");
         $twilio_number = getenv("TWILIO_NUMBER");
         $client = new Client($account_sid, $auth_token);
-        $client->messages->create($request->phone, ['from' => $twilio_number, 'body' => 'كود التحقق الخاص بك هو ' . $phone_verify->code . '\n صلاحية الكود 30 دقيقة فقط']);
+        $client->messages->create($request->phone, ['from' => $twilio_number, 'body' => 'كود التحقق الخاص بك هو ' . $phone_verify->code . '
+صلاحية الكود 30 دقيقة فقط']);
         $response = [
             'message' => 'تم تسجيل الحساب بنجاح',
             'user' => $user,

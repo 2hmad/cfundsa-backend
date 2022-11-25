@@ -113,7 +113,8 @@ class UserController extends Controller
             $auth_token = getenv("TWILIO_AUTH_TOKEN");
             $twilio_number = getenv("TWILIO_NUMBER");
             $client = new Client($account_sid, $auth_token);
-            $client->messages->create($user->phone, ['from' => $twilio_number, 'body' => 'كود التحقق الخاص بك هو ' . $generate_code->code . '\n صلاحية الكود 30 دقيقة فقط']);
+            $client->messages->create($user->phone, ['from' => $twilio_number, 'body' => 'كود التحقق الخاص بك هو ' . $generate_code->code . '
+صلاحية الكود 30 دقيقة فقط']);
             return response()->json([
                 'alert' => 'تم إعادة إرسال الكود بنجاح'
             ], 200);
