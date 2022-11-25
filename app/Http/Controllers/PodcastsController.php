@@ -17,6 +17,11 @@ class PodcastsController extends Controller
         });
         return $podcasts;
     }
+    public function getLimitedPodcasts()
+    {
+        $podcasts = Podcasts::orderBy('id', 'DESC')->limit(6)->get();
+        return $podcasts;
+    }
     public function getAllPodcasts()
     {
         $podcasts = Podcasts::orderBy('id', 'DESC')->get();

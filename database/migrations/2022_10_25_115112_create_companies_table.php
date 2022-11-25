@@ -15,22 +15,15 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
+            $table->string('company_number');
             $table->string('company_name');
             $table->string('commercial_register')->nullable();
             $table->string('website')->nullable();
+            $table->text('sector');
             $table->string('share_manager_name')->nullable();
             $table->string('share_manager_phone')->nullable();
-            $table->text('sector');
-            $table->text('investor_category');
-            $table->text('ipos_platform');
-            $table->string('funding_amount');
             $table->unsignedFloat('share_price');
             $table->string('company_evaluation');
-            $table->string('first_round_investors');
-            $table->string('second_round_investors');
-            $table->string('first_round_offering');
-            $table->string('second_round_offering');
-            $table->text('ipos_status');
             $table->text('details')->nullable();
             $table->timestamps();
         });

@@ -12,7 +12,10 @@ class ArticlesController extends Controller
 {
     public function thumbs()
     {
-        $articles = Articles::limit(4)->inRandomOrder()->where('article_type', 'article')->with('comments')->get();
+        $articles = Articles::where([
+            ['article_type', 'article'],
+            ['pin', '1'],
+        ])->with('comments')->limit(4)->get();
         // map on articles and exclude content
         $articles = $articles->map(function ($article) {
             $article->content = null;
@@ -37,7 +40,6 @@ class ArticlesController extends Controller
             $news->content = substr($news->content, 0, 200) . '...';
             return $news;
         });
-        // extract articles and appointments from article_type
         return [
             'articles' => $articles,
             'news' => $news,
@@ -112,6 +114,7 @@ class ArticlesController extends Controller
             'tags' => $request->tags,
             'views' => 0,
             'comments' => 0,
+            'pin' => $request->pin,
             'image' => 'storage/articles/' . $image_name,
             'article_type' => $request->category,
         ]);

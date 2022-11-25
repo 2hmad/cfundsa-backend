@@ -73,6 +73,7 @@ Route::get('debt-financing/companies', [DebtFinancingController::class, 'getComp
 Route::get('debt-financing/statistics', [DebtFinancingController::class, 'getStatistics']);
 
 Route::get('podcasts', [PodcastsController::class, 'getPodcasts']);
+Route::get('podcasts/limited', [PodcastsController::class, 'getLimitedPodcasts']);
 Route::get('podcast/{id}', [PodcastsController::class, 'getPodcast']);
 
 Route::get('deal', [DealsController::class, 'summary']);
@@ -126,6 +127,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
     Route::post('appointments', [AppointmentsController::class, 'createAppointment']);
     Route::delete('appointments/{id}', [AppointmentsController::class, 'deleteAppointment']);
+
+    Route::post('debt-financing/platforms', [DebtFinancingController::class, 'createPlatforms']);
+    Route::delete('debt-financing/platforms/{id}', [DebtFinancingController::class, 'deletePlatforms']);
+
+    Route::post('debt-financing/companies', [DebtFinancingController::class, 'createCompanies']);
+    Route::delete('debt-financing/companies/{id}', [DebtFinancingController::class, 'deleteCompanies']);
+
+    Route::post('debt-financing/statistics', [DebtFinancingController::class, 'createStatistics']);
+    Route::delete('debt-financing/statistics/{id}', [DebtFinancingController::class, 'deleteStatistics']);
 
     Route::get('podcasts', [PodcastsController::class, 'getAllPodcasts']);
     Route::post('podcasts', [PodcastsController::class, 'createPodcasts']);

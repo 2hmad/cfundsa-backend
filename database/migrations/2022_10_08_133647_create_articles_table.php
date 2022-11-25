@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('tags');
             $table->unsignedInteger('views');
             $table->unsignedInteger('comments');
+            $table->string('pin');
             $table->string('image');
             $table->text('article_type');
             $table->timestamps();

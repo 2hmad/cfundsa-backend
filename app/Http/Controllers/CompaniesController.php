@@ -24,6 +24,8 @@ class CompaniesController extends Controller
             ], 400);
         }
         Companies::create([
+            // set company number examble 000001
+            'company_number' => str_pad(Companies::count() + 1, 6, '0', STR_PAD_LEFT),
             'company_name' => $request->company_name,
             'commercial_register' => $request->commercial_register,
             'website' => $request->website,

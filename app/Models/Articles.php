@@ -16,6 +16,7 @@ class Articles extends Model
         'tags',
         'views',
         'comments',
+        'pin',
         'image',
         'article_type',
         'created_at',

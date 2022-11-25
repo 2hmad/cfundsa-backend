@@ -16,17 +16,19 @@ return new class extends Migration
         Schema::create('ipos', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('company_id');
+            $table->string('first_round_company_evaluation')->nullable();
+            $table->string('second_round_company_evaluation')->nullable();
             $table->text('investor_category');
             $table->text('ipos_platform');
-            $table->unsignedFloat('size');
-            $table->string('funding_amount');
-            $table->unsignedFloat('share_price');
-            $table->string('first_round_investors');
-            $table->string('second_round_investors');
-            $table->string('offering_price');
+            $table->string('first_round_funding_amount')->nullable();
+            $table->string('second_round_funding_amount')->nullable();
+            $table->unsignedFloat('first_round_share_price')->nullable();
+            $table->unsignedFloat('second_round_share_price')->nullable();
+            $table->string('first_round_investors')->nullable();
+            $table->string('second_round_investors')->nullable();
+            $table->string('first_round_offering')->nullable();
+            $table->string('second_round_offering')->nullable();
             $table->string('offering_ratio');
-            $table->string('first_round_offering');
-            $table->string('second_round_offering');
             $table->text('ipos_status');
             $table->text('ipos_manager');
             $table->text('details')->nullable();
