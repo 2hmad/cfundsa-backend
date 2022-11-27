@@ -24,24 +24,23 @@ class CompaniesController extends Controller
             ], 400);
         }
         Companies::create([
-            // set company number examble 000001
             'company_number' => str_pad(Companies::count() + 1, 6, '0', STR_PAD_LEFT),
             'company_name' => $request->company_name,
             'commercial_register' => $request->commercial_register,
             'website' => $request->website,
+            'sector' => $request->sector,
             'share_manager_name' => $request->share_manager_name,
             'share_manager_phone' => $request->share_manager_phone,
-            'sector' => $request->sector,
-            'investor_category' => $request->investor_category,
-            'ipos_platform' => $request->platform,
-            'funding_amount' => $request->funding_amount,
+            // 'investor_category' => $request->investor_category,
+            // 'ipos_platform' => $request->platform,
+            // 'funding_amount' => $request->funding_amount,
             'share_price' => $request->share_price,
             'company_evaluation' => $request->company_valuation,
-            'first_round_investors' => $request->investors_number_round1,
-            'second_round_investors' => $request->investors_number_round2,
-            'first_round_offering' => $request->launch_date_round1,
-            'second_round_offering' => $request->launch_date_round2,
-            'ipos_status' => $request->ipos_status,
+            // 'first_round_investors' => $request->investors_number_round1,
+            // 'second_round_investors' => $request->investors_number_round2,
+            // 'first_round_offering' => $request->launch_date_round1,
+            // 'second_round_offering' => $request->launch_date_round2,
+            // 'ipos_status' => $request->ipos_status,
             'details' => $request->details,
         ]);
     }
