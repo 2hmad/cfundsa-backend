@@ -15,6 +15,10 @@ class CompaniesController extends Controller
     {
         return Companies::orderBy('id', 'DESC')->get();
     }
+    public function getCompany($id)
+    {
+        return Companies::where('id', $id)->first();
+    }
     public function createCompany(Request $request)
     {
         $checkCompany = Companies::where('company_name', $request->company_name)->first();
@@ -29,18 +33,25 @@ class CompaniesController extends Controller
             'commercial_register' => $request->commercial_register,
             'website' => $request->website,
             'sector' => $request->sector,
-            'share_manager_name' => $request->share_manager_name,
-            'share_manager_phone' => $request->share_manager_phone,
-            // 'investor_category' => $request->investor_category,
-            // 'ipos_platform' => $request->platform,
-            // 'funding_amount' => $request->funding_amount,
+            'share_manager_name' => $request->manager_name,
+            'share_manager_phone' => $request->manager_phone,
             'share_price' => $request->share_price,
             'company_evaluation' => $request->company_valuation,
-            // 'first_round_investors' => $request->investors_number_round1,
-            // 'second_round_investors' => $request->investors_number_round2,
-            // 'first_round_offering' => $request->launch_date_round1,
-            // 'second_round_offering' => $request->launch_date_round2,
-            // 'ipos_status' => $request->ipos_status,
+            'details' => $request->details,
+        ]);
+    }
+    public function updateCompany(Request $request, $id)
+    {
+        $company = Companies::where('id', $id)->first();
+        $company->update([
+            'company_name' => $request->company_name,
+            'commercial_register' => $request->commercial_register,
+            'website' => $request->website,
+            'sector' => $request->sector,
+            'share_manager_name' => $request->manager_name,
+            'share_manager_phone' => $request->manager_phone,
+            'share_price' => $request->share_price,
+            'company_evaluation' => $request->company_valuation,
             'details' => $request->details,
         ]);
     }

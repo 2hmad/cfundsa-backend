@@ -26,6 +26,7 @@ class IPOS extends Model
         'offering_ratio',
         'ipos_status',
         'ipos_manager',
+        'news_link',
         'details',
     ];
     protected $hidden = [

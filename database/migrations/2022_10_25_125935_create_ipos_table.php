@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('offering_ratio');
             $table->text('ipos_status');
             $table->text('ipos_manager');
+            $table->string('news_link')->nullable();
             $table->text('details')->nullable();
             $table->timestamps();
         });

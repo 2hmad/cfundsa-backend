@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmailVerification;
 use App\Models\Followers;
 use App\Models\PhoneVerification;
 use App\Models\Users;
@@ -154,6 +155,22 @@ class UserController extends Controller
         } else {
             return response()->json([
                 'alert' => 'هذا المستخدم غير موجود'
+            ], 400);
+        }
+    }
+    public function verifyEmail($token)
+    {
+        $checkCode = EmailVerification::where([
+            ['token', $token],
+        ])->first();
+        if ($checkCode !== null) {
+            $checkCode->delete();
+            return response()->json([
+                'alert' => 'تم تأكيد البريد الالكتروني بنجاح'
+            ], 200);
+        } else {
+            return response()->json([
+                'alert' => 'الكود غير صحيح'
             ], 400);
         }
     }

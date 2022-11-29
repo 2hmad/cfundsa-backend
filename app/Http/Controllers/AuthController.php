@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmailVerification;
 use App\Models\PhoneVerification;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Twilio\Rest\Client;
 
 class AuthController extends Controller
@@ -44,6 +46,13 @@ class AuthController extends Controller
             'token' => bin2hex(random_bytes(40)),
             'phone_verified' => 0,
         ]);
+        $email_verify = EmailVerification::create([
+            'user_id' => $user->id,
+            'token' => bin2hex(random_bytes(40)),
+        ]);
+        // send confirm email mail 
+        Mail::to($request->email)->send(new \App\Mail\ConfirmEmail($email_verify->token));
+
         $phone_verify = PhoneVerification::create([
             'user_id' => $user->id,
             'code' => rand(1000, 9999),

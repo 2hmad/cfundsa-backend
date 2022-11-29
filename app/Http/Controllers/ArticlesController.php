@@ -120,6 +120,17 @@ class ArticlesController extends Controller
         ]);
         return $article;
     }
+    public function updateArticle(Request $request, $id)
+    {
+        Articles::where('id', $id)->update([
+            'title' => $request->title,
+            'type' => $request->type,
+            'content' => $request->content,
+            'tags' => $request->tags,
+            'pin' => $request->pin,
+            'article_type' => $request->category,
+        ]);
+    }
     public function deleteArticle($id)
     {
         $article = Articles::where('id', $id)->first();

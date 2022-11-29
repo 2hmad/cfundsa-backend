@@ -44,6 +44,8 @@ Route::post('user/change-image', [UserController::class, 'changeImage'])->middle
 Route::post('user/resend-code', [UserController::class, 'resendCode'])->middleware('user.token');
 Route::post('user/verify-phone', [UserController::class, 'verifyPhone'])->middleware('user.token');
 
+Route::post('/verify-email/{token}', [UserController::class, 'verifyEmail']);
+
 Route::get('articles-thumbs', [ArticlesController::class, 'thumbs']);
 Route::get('articles', [ArticlesController::class, 'getArticles']);
 Route::get('article/{id}', [ArticlesController::class, 'getArticle']);
@@ -62,9 +64,11 @@ Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
 
 Route::get('ipos/limited', [IposController::class, 'getLimitedIpos']);
 Route::get('ipos', [IposController::class, 'getIpos']);
+Route::get('ipos/{id}', [IposController::class, 'getIposByID']);
 
 Route::get('companies/limited', [CompaniesController::class, 'getLimitedCompanies']);
 Route::get('companies', [CompaniesController::class, 'getCompanies']);
+Route::get('company/{id}', [CompaniesController::class, 'getCompany']);
 
 Route::get('statements/{year}', [StatementsController::class, 'getStatements']);
 
@@ -106,10 +110,12 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('articles', [ArticlesController::class, 'getAllArticles']);
     Route::post('articles', [ArticlesController::class, 'createArticle']);
+    Route::put('edit-article/{id}', [ArticlesController::class, 'updateArticle']);
     Route::delete('articles/{id}', [ArticlesController::class, 'deleteArticle']);
 
     Route::get('companies', [CompaniesController::class, 'getCompanies']);
     Route::post('companies', [CompaniesController::class, 'createCompany']);
+    Route::put('edit-company/{id}', [CompaniesController::class, 'updateCompany']);
     Route::delete('companies/{id}', [CompaniesController::class, 'deleteCompany']);
 
     Route::get('statements', [StatementsController::class, 'getAllStatements']);
@@ -118,6 +124,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('ipos', [IposController::class, 'getIpos']);
     Route::post('ipos', [IposController::class, 'createIpos']);
+    Route::put('edit-ipos/{id}', [IposController::class, 'updateIpos']);
     Route::delete('ipos/{id}', [IposController::class, 'deleteIpos']);
 
     Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
