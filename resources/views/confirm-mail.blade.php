@@ -64,7 +64,7 @@
     <div class="container">
         <h1>التحقق من البريد الالكتروني في منصة التمويل الجماعي</h1>
         <p>من فضلك قم بالدخول علي الرابط التالي من اجل التحقق من بريدك الالكتروني</p>
-        <a href="http://cfundsa.com/verify-email/{{ $token }}" target="_blank">تأكيد البريد الالكتروني</a>
+        <a href="https://cfundsa.com/verify-email/{{ $token }}" target="_blank">تأكيد البريد الالكتروني</a>
     </div>
 </body>
 
