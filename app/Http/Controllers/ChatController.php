@@ -16,7 +16,7 @@ class ChatController extends Controller
         $user = Users::where('token', $request->header('Authorization'))->first();
         $chats = OpenedChats::where('user_id', $user->id)->orWhere('owner_id', $user->id)->get();
         foreach ($chats as $chat) {
-            $chat->messages = Messages::where('chat_id', $chat->chat_id)->with('user')->orderBy('id', 'DESC')->first();
+            $chat->messages = Messages::where('chat_id', $chat->chat_id)->with(['user', 'ad'])->orderBy('id', 'DESC')->first();
         }
         return $chats;
     }
