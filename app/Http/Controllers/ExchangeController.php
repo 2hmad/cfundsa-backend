@@ -58,7 +58,7 @@ class ExchangeController extends Controller
     }
     public function getLimitedAds()
     {
-        return ExchangeAds::orderBy('id', 'DESC')->with(['offers', 'company'])->limit(6)->get();
+        return ExchangeAds::orderBy('id', 'DESC')->with(['offers', 'company'])->limit(5)->get();
     }
     public function getAd($id)
     {

@@ -9,7 +9,7 @@ class CompaniesController extends Controller
 {
     public function getLimitedCompanies()
     {
-        return Companies::orderBy('id', 'DESC')->limit(4)->get();
+        return Companies::orderBy('id', 'DESC')->limit(5)->get();
     }
     public function getCompanies()
     {
