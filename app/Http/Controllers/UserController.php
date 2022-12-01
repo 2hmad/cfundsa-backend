@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailVerification;
 use App\Models\Followers;
+use App\Models\Notifications;
 use App\Models\PhoneVerification;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -181,5 +182,34 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         return Users::where('id', $id)->delete();
+    }
+    public function getNotifications(Request $request)
+    {
+        $user = Users::where('token', $request->header('Authorization'))->first();
+        if ($user !== null) {
+            return Notifications::where([
+                ['user_id', $user->id]
+            ])->orderBy('read', 'ASC')->get();
+        } else {
+            return response()->json([
+                'alert' => 'هذا المستخدم غير موجود'
+            ], 400);
+        }
+    }
+    public function readNotification($id)
+    {
+        $notification = Notifications::where('id', $id)->first();
+        if ($notification !== null) {
+            $notification->update([
+                'read' => 1,
+            ]);
+            return response()->json([
+                'alert' => 'تم تحديد الاشعار كمقروء'
+            ], 200);
+        } else {
+            return response()->json([
+                'alert' => 'هذا الاشعار غير موجود'
+            ], 400);
+        }
     }
 }

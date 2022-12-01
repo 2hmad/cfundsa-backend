@@ -22,7 +22,7 @@ class DealsController extends Controller
     public function getDeal(Request $request)
     {
         $user = Users::where('token', $request->header('Authorization'))->first();
-        $chat = OpenedChats::where('chat_id', $request->chat_id)->with(['owner', 'user', 'ad', 'messages'])->first();
+        $chat = OpenedChats::where('chat_id', $request->chat_id)->with(['owner', 'user', 'ad', 'messages', 'approved_deal'])->first();
         if ($chat) {
             $ad = ExchangeAds::where('id', $chat->ad_id)->with(['user', 'company'])->first();
             $offer = ExchangeOffers::where([

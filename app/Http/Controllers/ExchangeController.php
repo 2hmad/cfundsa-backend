@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExchangeAds;
 use App\Models\ExchangeOffers;
+use App\Models\Notifications;
 use App\Models\Users;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,18 @@ class ExchangeController extends Controller
             'published_at' => date('Y-m-d H:i:s'),
             'status' => 'available',
         ]);
+        Notifications::create([
+            'user_id' => $user->id,
+            'message' => 'تم انشاء اعلانك الخاص رقم ' . $add->ad_id,
+            'read' => false
+        ]);
         return $add;
     }
     public function getAdsByUser(Request $request)
     {
         $user = Users::where('token', $request->header('Authorization'))->first();
         $ads = ExchangeAds::orderBy('id', 'DESC')->where('user_id', $user->id)->with(['offers', 'company'])->get();
+        $offers = ExchangeOffers::where('user_id', $user->id)->with('ad')->get();
         $available_ads = [];
         $completed_ads = [];
         foreach ($ads as $ad) {
@@ -42,6 +49,7 @@ class ExchangeController extends Controller
         return [
             'available_ads' => $available_ads,
             'completed_ads' => $completed_ads,
+            'my_offers' => $offers,
         ];
     }
     public function getAds()
@@ -69,6 +77,12 @@ class ExchangeController extends Controller
                 'ad_id' => $request->ad_id,
                 'shares_qty' => $request->shares_qty,
                 'price' => $request->price,
+            ]);
+            $ad = ExchangeAds::where('id', $request->ad_id)->first();
+            Notifications::create([
+                'user_id' => $ad->user_id,
+                'message' => 'تم اضافة عرض جديد علي اعلانك رقم ' . $ad->ad_id,
+                'read' => false
             ]);
             return response()->json([
                 'offer' => $added->with('user')->first(),

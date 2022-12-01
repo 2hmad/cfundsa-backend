@@ -25,10 +25,14 @@ class OpenedChats extends Model
     }
     public function ad()
     {
-        return $this->belongsTo(ExchangeAds::class, 'ad_id');
+        return $this->belongsTo(ExchangeAds::class, 'ad_id')->with('company');
     }
     public function messages()
     {
         return $this->hasMany(Messages::class, 'chat_id', 'chat_id')->with('user');
+    }
+    public function approved_deal()
+    {
+        return $this->hasOne(PendingDeals::class, 'chat_id', 'chat_id');
     }
 }

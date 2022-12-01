@@ -83,6 +83,7 @@ Route::get('podcast/{id}', [PodcastsController::class, 'getPodcast']);
 Route::get('deal', [DealsController::class, 'summary']);
 
 Route::get('search/{keyword}', [SearchController::class, 'search']);
+Route::get('search-ads/{keyword}', [SearchController::class, 'searchAds']);
 
 Route::post('exchange-ads', [ExchangeController::class, 'addAd'])->middleware('user.token');
 Route::post('exchange-ads/user', [ExchangeController::class, 'getAdsByUser'])->middleware('user.token');
@@ -96,6 +97,10 @@ Route::post('/chats', [ChatController::class, 'getChats'])->middleware('user.tok
 Route::post('/chat/new', [ChatController::class, 'newChat'])->middleware('user.token');
 Route::post('/chat', [ChatController::class, 'getChat'])->middleware('user.token');
 Route::post('/chat/send-message', [ChatController::class, 'sendMessage'])->middleware('user.token');
+Route::post('/chat/approve-deal/{id}', [ChatController::class, 'approveDeal'])->middleware('user.token');
+
+Route::post('get-notifications', [UserController::class, 'getNotifications'])->middleware('user.token');
+Route::post('read-notification/{id}', [UserController::class, 'readNotification'])->middleware('user.token');
 
 Route::post('/deal/get-deal', [DealsController::class, 'getDeal'])->middleware('user.token');
 Route::post('/deal/complete-deal', [DealsController::class, 'completeDeal'])->middleware('user.token');

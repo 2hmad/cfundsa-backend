@@ -25,4 +25,8 @@ class ExchangeOffers extends Model
     {
         return $this->belongsTo(Users::class, 'user_id');
     }
+    public function ad()
+    {
+        return $this->belongsTo(ExchangeAds::class, 'ad_id')->with(['company', 'offers']);
+    }
 }
