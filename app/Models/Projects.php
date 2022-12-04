@@ -11,6 +11,7 @@ class Projects extends Model
     protected $fillable = [
         'project',
         'company_id',
+        "fund_id",
         'date',
         'status',
         'created_at',

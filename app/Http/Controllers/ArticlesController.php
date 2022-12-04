@@ -111,6 +111,8 @@ class ArticlesController extends Controller
             'type' => $request->type,
             'publish_date' => Carbon::now(),
             'content' => $request->content,
+            'companies' => $request->companies,
+            "fund_ids" => $request->investments_funds,
             'tags' => $request->tags,
             'views' => 0,
             'comments' => 0,
@@ -129,6 +131,8 @@ class ArticlesController extends Controller
             'tags' => $request->tags,
             'pin' => $request->pin,
             'article_type' => $request->category,
+            'companies' => $request->companies,
+            "fund_ids" => $request->investments_funds,
         ]);
     }
     public function deleteArticle($id)

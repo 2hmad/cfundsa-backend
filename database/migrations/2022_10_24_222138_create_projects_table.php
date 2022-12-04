@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('project');
             $table->unsignedInteger('company_id');
+            $table->unsignedInteger('fund_id')->nullable();
             $table->date('date');
             $table->string('status');
             $table->timestamps();

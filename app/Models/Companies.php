@@ -26,4 +26,13 @@ class Companies extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Projects::class, 'company_id', 'id');
+    }
+    public function appointments()
+    {
+        return $this->hasMany(Appointments::class, 'company_id', 'id');
+    }
 }

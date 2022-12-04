@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('investment_funds', function (Blueprint $table) {
             $table->id();
+            $table->string('fund_number');
             $table->string('fund');
             $table->string('platform');
             $table->string('type');

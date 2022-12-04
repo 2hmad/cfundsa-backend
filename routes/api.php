@@ -57,6 +57,7 @@ Route::get('waiting-dates', [WaitingDatesController::class, 'getWaitingDates']);
 Route::get('waiting-dates/{date}', [WaitingDatesController::class, 'getWaitingDatesByDate']);
 
 Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
+Route::get('investment-fund/{id}', [InvestmentFundsController::class, 'getInvestmentFund']);
 
 Route::get('projects/limited', [ProjectsController::class, 'getLimitedProjects']);
 

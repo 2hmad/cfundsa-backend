@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('type');
             $table->date('publish_date');
             $table->longText('content');
+            $table->string('companies')->nullable();
+            $table->string('fund_ids')->nullable();
             $table->string('tags');
             $table->unsignedInteger('views');
             $table->unsignedInteger('comments');

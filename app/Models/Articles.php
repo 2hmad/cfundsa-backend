@@ -13,6 +13,8 @@ class Articles extends Model
         'type',
         'publish_date',
         'content',
+        'companies',
+        "fund_ids",
         'tags',
         'views',
         'comments',
@@ -28,11 +30,12 @@ class Articles extends Model
     ];
     protected $casts = [
         'tags' => 'array',
+        'companies' => 'array',
+        'fund_ids' => 'array',
     ];
 
     public function comments()
     {
-        // get comments for this article and user info and order by date
         return $this->hasMany(ArticlesComments::class, 'article_id', 'id')->with('user')->orderBy('created_at', 'DESC');
     }
 }

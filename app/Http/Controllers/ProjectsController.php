@@ -20,6 +20,7 @@ class ProjectsController extends Controller
         Projects::create([
             'project' => $request->project,
             'company_id' => $request->company_id,
+            'fund_id' => $request->investment_fund,
             'date' => $request->date,
             'status' => $request->status,
         ]);

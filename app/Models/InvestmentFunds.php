@@ -9,6 +9,7 @@ class InvestmentFunds extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'fund_number',
         'fund',
         'platform',
         'type',
@@ -22,4 +23,9 @@ class InvestmentFunds extends Model
         'location',
         'details',
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Projects::class, 'fund_id');
+    }
 }

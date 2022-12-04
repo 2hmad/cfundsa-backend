@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use App\Models\Companies;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,13 @@ class CompaniesController extends Controller
     }
     public function getCompany($id)
     {
-        return Companies::where('id', $id)->first();
+        $company = Companies::where('id', $id)->with(['projects', 'appointments'])->first();
+        $articles = Articles::where('companies', '!=', null)->get();
+        $articles = $articles->filter(function ($article) use ($company) {
+            return in_array($company->id, $article->companies);
+        });
+        $company->articles = $articles;
+        return $company;
     }
     public function createCompany(Request $request)
     {
