@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articles;
 use App\Models\Companies;
+use App\Models\IPOS;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -24,6 +25,8 @@ class CompaniesController extends Controller
             return in_array($company->id, $article->companies);
         });
         $company->articles = $articles;
+        $ipos = IPOS::where('company_id', $id)->orderBy('id', 'DESC')->first();
+        $company->ipos = $ipos;
         return $company;
     }
     public function createCompany(Request $request)
