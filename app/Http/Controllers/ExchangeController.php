@@ -13,24 +13,35 @@ class ExchangeController extends Controller
     public function addAd(Request $request)
     {
         $user = Users::where('token', $request->header('Authorization'))->first();
-        $add = ExchangeAds::create([
-            'user_id' => $user->id,
-            'company_id' => $request->company_id,
-            'ad_id' => str_pad(ExchangeAds::count() + 1, 7, '0', STR_PAD_LEFT),
-            'type' => $request->type,
-            'shares_qty' => $request->shares_qty,
-            'price_availability' => $request->price_availability,
-            'price' => $request->price,
-            'notes' => $request->notes,
-            'published_at' => date('Y-m-d H:i:s'),
-            'status' => 'available',
-        ]);
-        Notifications::create([
-            'user_id' => $user->id,
-            'message' => 'تم انشاء اعلانك الخاص رقم ' . $add->ad_id,
-            'read' => false
-        ]);
-        return $add;
+        $check = ExchangeAds::where([
+            ['user_id', $user->id],
+            ['company_id' => $request->company_id],
+            ['type' => $request->type],
+            ['shares_qty' => $request->shares_qty],
+            ['price_availability' => $request->price_availability]
+        ])->first();
+        if ($check == null) {
+            $add = ExchangeAds::create([
+                'user_id' => $user->id,
+                'company_id' => $request->company_id,
+                'ad_id' => str_pad(ExchangeAds::count() + 1, 7, '0', STR_PAD_LEFT),
+                'type' => $request->type,
+                'shares_qty' => $request->shares_qty,
+                'price_availability' => $request->price_availability,
+                'price' => $request->price,
+                'notes' => $request->notes,
+                'published_at' => date('Y-m-d H:i:s'),
+                'status' => 'available',
+            ]);
+            Notifications::create([
+                'user_id' => $user->id,
+                'message' => 'تم انشاء اعلانك الخاص رقم ' . $add->ad_id,
+                'read' => false
+            ]);
+            return $add;
+        } else {
+            return response()->json(['alert' => 'هذا الاعلان موجود مسبقا'], 400);
+        }
     }
     public function getAdsByUser(Request $request)
     {
