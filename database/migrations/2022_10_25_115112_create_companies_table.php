@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('share_manager_phone')->nullable();
             $table->unsignedFloat('share_price');
             $table->string('company_evaluation');
+            $table->text('logo')->nullable();
             $table->text('details')->nullable();
             $table->timestamps();
         });

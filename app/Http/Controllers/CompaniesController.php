@@ -37,6 +37,9 @@ class CompaniesController extends Controller
                 'alert' => 'الشركة موجودة بالفعل',
             ], 400);
         }
+        $image = $request->file('logo');
+        $image_name =  $request->company_name . '.' . $image->getClientOriginalExtension();
+        $image->move(storage_path('/app/public/companies'), $image_name);
         Companies::create([
             'company_number' => str_pad(Companies::count() + 1, 6, '0', STR_PAD_LEFT),
             'company_name' => $request->company_name,
@@ -47,6 +50,7 @@ class CompaniesController extends Controller
             'share_manager_phone' => $request->manager_phone,
             'share_price' => $request->share_price,
             'company_evaluation' => $request->company_valuation,
+            'logo' => "storage/companies/" . $image_name,
             'details' => $request->details,
         ]);
     }

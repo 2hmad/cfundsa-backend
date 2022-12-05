@@ -18,6 +18,7 @@ class Companies extends Model
         'share_manager_phone',
         'share_price',
         'company_evaluation',
+        'logo',
         'details',
         'created_at',
         'updated_at',
