@@ -9,7 +9,7 @@ class ProjectsController extends Controller
 {
     public function getLimitedProjects()
     {
-        return Projects::orderBy('id', 'desc')->with('company')->limit(6)->get();
+        return Projects::orderBy('id', 'desc')->with('company')->limit(5)->get();
     }
     public function getProjects()
     {
