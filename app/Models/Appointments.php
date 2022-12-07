@@ -12,7 +12,8 @@ class Appointments extends Model
         'company_id',
         'event',
         'event_type',
-        'location',
+        'details',
+        'news_link',
         'date',
         'created_at',
         'updated_at'

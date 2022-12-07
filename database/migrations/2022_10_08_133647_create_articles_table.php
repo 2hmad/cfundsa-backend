@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->date('publish_date');
             $table->longText('content');
             $table->string('companies')->nullable();

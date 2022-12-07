@@ -24,9 +24,9 @@ return new class extends Migration
             $table->unsignedFloat('platform_share');
             $table->text('fund_duration');
             $table->unsignedFloat('total_return');
-            $table->text('fund_manager');
-            $table->text('developer');
-            $table->text('location');
+            $table->text('fund_manager')->nullable();
+            $table->text('developer')->nullable();
+            $table->text('location')->nullable();
             $table->text('details')->nullable();
             $table->timestamps();
         });

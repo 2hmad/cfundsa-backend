@@ -18,7 +18,8 @@ return new class extends Migration
             $table->unsignedInteger('company_id');
             $table->string('event');
             $table->string('event_type');
-            $table->string('location');
+            $table->text('details')->nullable();
+            $table->string('news_link')->nullable();
             $table->date('date');
             $table->timestamps();
         });

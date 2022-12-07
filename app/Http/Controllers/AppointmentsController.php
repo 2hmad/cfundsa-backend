@@ -17,7 +17,8 @@ class AppointmentsController extends Controller
             'company_id' => $request->company_id,
             'event' => $request->event,
             'event_type' => $request->event_type,
-            'location' => $request->location,
+            'details' => $request->details,
+            'news_link' => $request->news_link,
             'date' => $request->date
         ]);
     }
