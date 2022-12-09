@@ -30,12 +30,12 @@ class ArticlesController extends Controller
     }
     public function getArticles()
     {
-        $articles = Articles::orderBy('id', 'DESC')->where('article_type', 'article')->paginate(10);
+        $articles = Articles::orderBy('id', 'DESC')->where('article_type', 'article')->paginate(6);
         $articles->getCollection()->transform(function ($article) {
             $article->content = substr($article->content, 0, 200) . '...';
             return $article;
         });
-        $news = Articles::orderBy('id', 'DESC')->where('article_type', 'news')->with('comments')->paginate(6);
+        $news = Articles::orderBy('id', 'DESC')->where('article_type', 'news')->with('comments')->paginate(10);
         $news->getCollection()->transform(function ($news) {
             $news->content = substr($news->content, 0, 200) . '...';
             return $news;
