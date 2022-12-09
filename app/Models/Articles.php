@@ -11,6 +11,7 @@ class Articles extends Model
     protected $fillable = [
         'title',
         'type',
+        'type_color',
         'publish_date',
         'content',
         'companies',

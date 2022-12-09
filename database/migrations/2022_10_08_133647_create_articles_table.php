@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('type')->nullable();
+            $table->string('type_color')->nullable();
             $table->date('publish_date');
             $table->longText('content');
             $table->string('companies')->nullable();

@@ -109,6 +109,7 @@ class ArticlesController extends Controller
         $article = Articles::create([
             'title' => $request->title,
             'type' => $request->type,
+            'type_color' => $request->type_color,
             'publish_date' => Carbon::now(),
             'content' => $request->content,
             'companies' => $request->companies,
@@ -127,6 +128,7 @@ class ArticlesController extends Controller
         Articles::where('id', $id)->update([
             'title' => $request->title,
             'type' => $request->type,
+            'type_color' => $request->type_color,
             'content' => $request->content,
             'tags' => $request->tags,
             'pin' => $request->pin,
