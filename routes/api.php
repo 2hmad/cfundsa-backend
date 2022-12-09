@@ -135,6 +135,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
     Route::post('investment-funds', [InvestmentFundsController::class, 'createInvestmentFunds']);
+    Route::put('edit-investment-funds/{id}', [InvestmentFundsController::class, 'editInvestmentFunds']);
     Route::delete('investment-funds/{id}', [InvestmentFundsController::class, 'deleteInvestmentFunds']);
 
     Route::get('appointments', [AppointmentsController::class, 'getAppointments']);

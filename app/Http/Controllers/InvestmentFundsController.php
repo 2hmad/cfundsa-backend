@@ -40,6 +40,23 @@ class InvestmentFundsController extends Controller
             'details' => $request->details,
         ]);
     }
+    public function editInvestmentFunds(Request $request, $id)
+    {
+        InvestmentFunds::where('id', $id)->update([
+            'fund' => $request->fund,
+            'platform' => $request->platform,
+            'type' => $request->type,
+            'offer_date' => $request->date,
+            'value' => $request->value,
+            'platform_share' => $request->platformShare,
+            'fund_duration' => $request->fundDuration,
+            'total_return' => $request->totalReturn,
+            'fund_manager' => $request->fundManager,
+            'developer' => $request->developer,
+            'location' => $request->location,
+            'details' => $request->details,
+        ]);
+    }
     public function deleteInvestmentFunds($id)
     {
         InvestmentFunds::where('id', $id)->delete();
