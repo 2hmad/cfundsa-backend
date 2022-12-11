@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/forget-password', [AuthController::class, 'forgetPassword']);
 Route::post('auth/register', [AuthController::class, 'register']);
 
 Route::get('user-info/{id}', [UserController::class, 'getUserInfo']);
