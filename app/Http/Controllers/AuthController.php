@@ -17,6 +17,11 @@ class AuthController extends Controller
         $checkEmail = Users::where('email', $request->email)->first();
         if ($checkEmail) {
             if (Hash::check($request->password, $checkEmail->password)) {
+                // check if user is verified
+                $checkEmailVerified = EmailVerification::where('user_id', $checkEmail->id)->first();
+                if ($checkEmailVerified !== null) {
+                    return response()->json(['alert' => 'البريد الإلكتروني غير مفعل'], 401);
+                }
                 $response = [
                     'message' => 'Login Success',
                     'user' => $checkEmail,
