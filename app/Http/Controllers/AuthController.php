@@ -20,7 +20,7 @@ class AuthController extends Controller
                 // check if user is verified
                 $checkEmailVerified = EmailVerification::where('user_id', $checkEmail->id)->first();
                 if ($checkEmailVerified !== null) {
-                    return response()->json(['alert' => 'البريد الإلكتروني غير مفعل'], 401);
+                    return response()->json(['alert' => 'البريد الإلكتروني غير مفعل ، يرجي تأكيده من خلال الرابط المرسل علي بريدك الالكتروني'], 401);
                 }
                 $response = [
                     'message' => 'Login Success',
