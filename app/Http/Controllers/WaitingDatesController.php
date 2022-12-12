@@ -10,7 +10,7 @@ class WaitingDatesController extends Controller
 {
     public function getWaitingDates()
     {
-        return Appointments::orderBy('id', 'DESC')->with('company')->limit(10)->get();
+        return Appointments::orderBy('date', 'DESC')->with('company')->limit(10)->get();
     }
     public function getWaitingDatesByDate($date)
     {
