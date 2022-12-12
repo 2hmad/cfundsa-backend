@@ -8,6 +8,7 @@ use App\Models\Notifications;
 use App\Models\PhoneVerification;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Twilio\Rest\Client;
 
 class UserController extends Controller
@@ -73,6 +74,28 @@ class UserController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
             ]);
+        } else {
+            return response()->json([
+                'alert' => 'هذا المستخدم غير موجود'
+            ], 400);
+        }
+    }
+    public function editProfilePassword(Request $request)
+    {
+        $user = Users::where('token', $request->header('Authorization'))->first();
+        if ($user !== null) {
+            if (Hash::check($request->current, $user->password)) {
+                $user->update([
+                    'password' => Hash::make($request->new),
+                ]);
+                return response()->json([
+                    'alert' => 'تم تغيير كلمة المرور بنجاح'
+                ], 200);
+            } else {
+                return response()->json([
+                    'alert' => 'كلمة المرور الحالية غير صحيحة'
+                ], 400);
+            }
         } else {
             return response()->json([
                 'alert' => 'هذا المستخدم غير موجود'

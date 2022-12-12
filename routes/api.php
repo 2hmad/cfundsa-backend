@@ -41,6 +41,7 @@ Route::get('user-info/{id}', [UserController::class, 'getUserInfo']);
 Route::post('user/follow', [UserController::class, 'followUser'])->middleware('user.token');
 Route::post('user/unfollow', [UserController::class, 'unFollowUser'])->middleware('user.token');
 Route::post('user/edit-profile', [UserController::class, 'editProfile'])->middleware('user.token');
+Route::post('user/edit-profile/password', [UserController::class, 'editProfilePassword'])->middleware('user.token');
 Route::post('user/change-image', [UserController::class, 'changeImage'])->middleware('user.token');
 Route::post('user/resend-code', [UserController::class, 'resendCode'])->middleware('user.token');
 Route::post('user/verify-phone', [UserController::class, 'verifyPhone'])->middleware('user.token');
