@@ -147,10 +147,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('appointments/{id}', [AppointmentsController::class, 'editAppointment']);
     Route::delete('appointments/{id}', [AppointmentsController::class, 'deleteAppointment']);
 
+    Route::get('debt-financing/platforms/{id}', [DebtFinancingController::class, 'getPlatform']);
     Route::post('debt-financing/platforms', [DebtFinancingController::class, 'createPlatforms']);
+    Route::put('debt-financing/platforms/{id}', [DebtFinancingController::class, 'editPlatforms']);
     Route::delete('debt-financing/platforms/{id}', [DebtFinancingController::class, 'deletePlatforms']);
 
+    Route::get('debt-financing/companies/{id}', [DebtFinancingController::class, 'getCompany']);
     Route::post('debt-financing/companies', [DebtFinancingController::class, 'createCompanies']);
+    Route::put('debt-financing/companies/{id}', [DebtFinancingController::class, 'editCompany']);
     Route::delete('debt-financing/companies/{id}', [DebtFinancingController::class, 'deleteCompanies']);
 
     Route::post('debt-financing/statistics', [DebtFinancingController::class, 'createStatistics']);

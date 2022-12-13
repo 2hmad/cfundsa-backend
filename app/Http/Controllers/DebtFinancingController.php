@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class DebtFinancingController extends Controller
 {
+    public function getPlatform($id)
+    {
+        return DebtPlatforms::where('id', $id)->first();
+    }
     public function getPlatforms()
     {
         return DebtPlatforms::orderBy('id', 'DESC')->get();
@@ -23,9 +27,22 @@ class DebtFinancingController extends Controller
             'location' => $request->location,
         ]);
     }
+    public function editPlatforms(Request $request, $id)
+    {
+        return DebtPlatforms::where('id', $id)->update([
+            'number' => $request->number,
+            'platform_name' => $request->platform_name,
+            'status' => $request->type,
+            'location' => $request->location,
+        ]);
+    }
     public function deletePlatforms($id)
     {
         return DebtPlatforms::where('id', $id)->delete();
+    }
+    public function getCompany($id)
+    {
+        return TroubledCompanies::where('id', $id)->first();
     }
     public function getCompanies()
     {
@@ -34,6 +51,19 @@ class DebtFinancingController extends Controller
     public function createCompanies(Request $request)
     {
         return TroubledCompanies::create([
+            'platform_name' => $request->platform_name,
+            'company_name' => $request->company_name,
+            'loan_date' => $request->loan_date,
+            'due_date' => $request->due_date,
+            'category' => $request->category,
+            'delay' => $request->delay,
+            'status' => $request->status,
+            'notes' => $request->notes,
+        ]);
+    }
+    public function editCompany(Request $request, $id)
+    {
+        return TroubledCompanies::where('id', $id)->update([
             'platform_name' => $request->platform_name,
             'company_name' => $request->company_name,
             'loan_date' => $request->loan_date,
