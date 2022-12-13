@@ -55,7 +55,7 @@ Route::post('article/add-comment', [ArticlesController::class, 'addComment'])->m
 
 Route::get('most-articles', [ArticlesController::class, 'getMostArticles']);
 
-Route::get('waiting-dates', [WaitingDatesController::class, 'getWaitingDates']);
+Route::get('waiting-dates', [WaitingDatesController::class, 'getWaiverifytingDates']);
 Route::get('waiting-dates/{date}', [WaitingDatesController::class, 'getWaitingDatesByDate']);
 
 Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
@@ -166,6 +166,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('projects/{id}', [ProjectsController::class, 'deleteProjects']);
 
     Route::get('users', [UserController::class, 'getAllUsers']);
+    Route::post('users/{id}/verify', [UserController::class, 'verifyUser']);
     Route::delete('users/{id}', [UserController::class, 'deleteUser']);
 
     Route::get('admins', [AdminsController::class, 'getAdmins']);

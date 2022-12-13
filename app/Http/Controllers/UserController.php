@@ -202,6 +202,15 @@ class UserController extends Controller
     {
         return Users::orderBy('id', 'DESC')->get();
     }
+    public function verifyUser($id)
+    {
+        Users::where('id', $id)->update([
+            'phone_verified' => 1,
+        ]);
+        return response()->json([
+            'alert' => 'تم تفعيل الحساب بنجاح'
+        ], 200);
+    }
     public function deleteUser($id)
     {
         return Users::where('id', $id)->delete();
