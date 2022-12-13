@@ -21,7 +21,7 @@ class AdsController extends Controller
             $check_ad->update([
                 'title' => $request->title,
                 'image_path' => $image_name,
-                'url' => $request->url,
+                'url' => $request->redirect_url,
             ]);
         } else {
             $image = $request->file('image');
@@ -30,7 +30,7 @@ class AdsController extends Controller
             Ads::create([
                 'title' => $request->title,
                 'image_path' => $image_name,
-                'url' => $request->url,
+                'url' => $request->redirect_url,
                 'page_location' => $request->page_location,
             ]);
         }
