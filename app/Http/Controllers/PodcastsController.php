@@ -56,6 +56,15 @@ class PodcastsController extends Controller
             'thumbnail' => "storage/podcasts/" . $image_name,
         ]);
     }
+    public function editPodcasts(Request $request, $id)
+    {
+        Podcasts::where('id', $id)->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'tags' => $request->tags,
+            'video_url' => $request->video,
+        ]);
+    }
     public function deletePodcast($id)
     {
         Podcasts::where('id', $id)->delete();

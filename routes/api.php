@@ -141,7 +141,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('investment-funds/{id}', [InvestmentFundsController::class, 'deleteInvestmentFunds']);
 
     Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
+    Route::get('appointment/{id}', [AppointmentsController::class, 'getAppointment']);
     Route::post('appointments', [AppointmentsController::class, 'createAppointment']);
+    Route::put('appointments/{id}', [AppointmentsController::class, 'editAppointment']);
     Route::delete('appointments/{id}', [AppointmentsController::class, 'deleteAppointment']);
 
     Route::post('debt-financing/platforms', [DebtFinancingController::class, 'createPlatforms']);
@@ -155,6 +157,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('podcasts', [PodcastsController::class, 'getAllPodcasts']);
     Route::post('podcasts', [PodcastsController::class, 'createPodcasts']);
+    Route::put('podcasts/{id}', [PodcastsController::class, 'editPodcasts']);
     Route::delete('podcasts/{id}', [PodcastsController::class, 'deletePodcast']);
 
     Route::get('categories', [CategoriesController::class, 'getCategories']);
