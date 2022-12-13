@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\AdsController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\AuthController;
@@ -47,6 +48,8 @@ Route::post('user/resend-code', [UserController::class, 'resendCode'])->middlewa
 Route::post('user/verify-phone', [UserController::class, 'verifyPhone'])->middleware('user.token');
 
 Route::post('/verify-email/{token}', [UserController::class, 'verifyEmail']);
+
+Route::get('ads', [AdsController::class, 'getAds']);
 
 Route::get('articles-thumbs', [ArticlesController::class, 'thumbs']);
 Route::get('articles', [ArticlesController::class, 'getArticles']);
@@ -121,6 +124,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('articles', [ArticlesController::class, 'createArticle']);
     Route::put('edit-article/{id}', [ArticlesController::class, 'updateArticle']);
     Route::delete('articles/{id}', [ArticlesController::class, 'deleteArticle']);
+
+    Route::post('ads', [AdsController::class, 'addAds']);
 
     Route::get('companies', [CompaniesController::class, 'getCompanies']);
     Route::post('companies', [CompaniesController::class, 'createCompany']);
