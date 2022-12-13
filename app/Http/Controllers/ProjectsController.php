@@ -15,9 +15,23 @@ class ProjectsController extends Controller
     {
         return Projects::orderBy('id', 'desc')->with('company')->get();
     }
+    public function getProject($id)
+    {
+        return Projects::where('id', $id)->with('company')->first();
+    }
     public function createProjects(Request $request)
     {
         Projects::create([
+            'project' => $request->project,
+            'company_id' => $request->company_id,
+            'fund_id' => $request->investment_fund,
+            'date' => $request->date,
+            'status' => $request->status,
+        ]);
+    }
+    public function editProjects(Request $request, $id)
+    {
+        Projects::where('id', $id)->update([
             'project' => $request->project,
             'company_id' => $request->company_id,
             'fund_id' => $request->investment_fund,

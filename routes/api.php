@@ -62,6 +62,7 @@ Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestment
 Route::get('investment-fund/{id}', [InvestmentFundsController::class, 'getInvestmentFund']);
 
 Route::get('projects/limited', [ProjectsController::class, 'getLimitedProjects']);
+Route::get('project/{id}', [ProjectsController::class, 'getProject']);
 
 Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
 
@@ -166,6 +167,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('projects', [ProjectsController::class, 'getProjects']);
     Route::post('projects', [ProjectsController::class, 'createProjects']);
+    Route::put('projects/{id}', [ProjectsController::class, 'editProjects']);
     Route::delete('projects/{id}', [ProjectsController::class, 'deleteProjects']);
 
     Route::get('users', [UserController::class, 'getAllUsers']);
