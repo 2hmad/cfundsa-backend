@@ -57,4 +57,12 @@ class ResetPassword extends Mailable
     {
         return [];
     }
+
+    // build the message.
+    public function build()
+    {
+        return $this->view('forget-password')->with([
+            'newPassword' => $this->newPassword,
+        ]);
+    }
 }
