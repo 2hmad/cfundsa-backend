@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('pin');
             $table->string('image');
             $table->text('article_type');
+            $table->boolean('published')->default(true);
             $table->timestamps();
         });
     }

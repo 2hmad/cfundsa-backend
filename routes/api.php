@@ -62,6 +62,7 @@ Route::get('waiting-dates', [WaitingDatesController::class, 'getWaitingDates']);
 Route::get('waiting-dates/{date}', [WaitingDatesController::class, 'getWaitingDatesByDate']);
 
 Route::get('investment-funds', [InvestmentFundsController::class, 'getInvestmentFunds']);
+Route::get('investment-funds/limited', [InvestmentFundsController::class, 'getLimitedInvestmentFunds']);
 Route::get('investment-fund/{id}', [InvestmentFundsController::class, 'getInvestmentFund']);
 
 Route::get('projects/limited', [ProjectsController::class, 'getLimitedProjects']);
@@ -124,6 +125,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('articles', [ArticlesController::class, 'createArticle']);
     Route::put('edit-article/{id}', [ArticlesController::class, 'updateArticle']);
     Route::delete('articles/{id}', [ArticlesController::class, 'deleteArticle']);
+    Route::put('articles/{type}/{id}', [ArticlesController::class, 'draftArticle']);
 
     Route::post('ads', [AdsController::class, 'addAds']);
 

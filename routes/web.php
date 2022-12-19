@@ -19,3 +19,6 @@ Route::get('/', function () {
 Route::get('/confirm-mail', function () {
     return view('confirm-mail');
 });
+Route::get('/forget-password', function () {
+    return view('forget-password');
+});

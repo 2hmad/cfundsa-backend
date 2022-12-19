@@ -15,6 +15,7 @@ class ArticlesController extends Controller
         $articles = Articles::where([
             ['article_type', 'article'],
             ['pin', '1'],
+            ['published', 1],
         ])->with('comments')->limit(4)->get();
         // map on articles and exclude content
         $articles = $articles->map(function ($article) {
@@ -25,17 +26,23 @@ class ArticlesController extends Controller
     }
     public function getAllArticles()
     {
-        $articles = Articles::orderBy('id', 'DESC')->get();
+        $articles = Articles::where('published', 1)->orderBy('id', 'DESC')->get();
         return $articles;
     }
     public function getArticles()
     {
-        $articles = Articles::orderBy('id', 'DESC')->where('article_type', 'article')->paginate(6);
+        $articles = Articles::orderBy('id', 'DESC')->where([
+            ['article_type', 'article'],
+            ['published', 1]
+        ])->paginate(6);
         $articles->getCollection()->transform(function ($article) {
             $article->content = substr($article->content, 0, 200) . '...';
             return $article;
         });
-        $news = Articles::orderBy('id', 'DESC')->where('article_type', 'news')->with('comments')->paginate(10);
+        $news = Articles::orderBy('id', 'DESC')->where([
+            ['article_type', 'news'],
+            ['published', 1]
+        ])->with('comments')->paginate(10);
         $news->getCollection()->transform(function ($news) {
             $news->content = substr($news->content, 0, 200) . '...';
             return $news;
@@ -54,8 +61,8 @@ class ArticlesController extends Controller
     }
     public function getMostArticles()
     {
-        $mostViews = Articles::orderBy('views', 'DESC')->limit(6)->get();
-        $mostComments = Articles::orderBy('comments', 'DESC')->limit(6)->get();
+        $mostViews = Articles::where('published', 1)->orderBy('views', 'DESC')->limit(6)->get();
+        $mostComments = Articles::where('published', 1)->orderBy('comments', 'DESC')->limit(6)->get();
         $mostViews = $mostViews->map(function ($article) {
             return [
                 'title' => $article->title,
@@ -120,6 +127,7 @@ class ArticlesController extends Controller
             'pin' => $request->pin,
             'image' => 'storage/articles/' . $image_name,
             'article_type' => $request->category,
+            'published' => 1,
         ]);
         return $article;
     }
@@ -144,5 +152,17 @@ class ArticlesController extends Controller
         $image = str_replace('storage/articles/', '', $image);
         unlink(storage_path('/app/public/articles/' . $image));
         $article->delete();
+    }
+    public function draftArticle($type, $id)
+    {
+        if ($type == 'publish') {
+            Articles::where('id', $id)->update([
+                'published' => 1,
+            ]);
+        } else {
+            Articles::where('id', $id)->update([
+                'published' => 0,
+            ]);
+        }
     }
 }

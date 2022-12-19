@@ -12,6 +12,10 @@ class InvestmentFundsController extends Controller
     {
         return InvestmentFunds::orderBy('id', 'DESC')->get();
     }
+    public function getLimitedInvestmentFunds()
+    {
+        return InvestmentFunds::orderBy('id', 'DESC')->limit(5)->get();
+    }
     public function getInvestmentFund($id)
     {
         $fund = InvestmentFunds::where('id', $id)->with(['projects'])->first();

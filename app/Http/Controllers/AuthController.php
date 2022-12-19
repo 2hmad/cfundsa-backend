@@ -42,11 +42,7 @@ class AuthController extends Controller
             $checkEmail->password = Hash::make($newPassword);
             $checkEmail->save();
 
-            $account_sid = getenv("TWILIO_SID");
-            $auth_token = getenv("TWILIO_AUTH_TOKEN");
-            $twilio_number = getenv("TWILIO_NUMBER");
-            $client = new Client($account_sid, $auth_token);
-            $client->messages->create($checkEmail->phone, ['from' => $twilio_number, 'body' => 'تم تغيير كلمة المرور لحسابك الي ' . $newPassword]);
+            Mail::to($request->email)->send(new \App\Mail\ResetPassword($newPassword));
         } else {
             return response()->json(['alert' => 'المستخدم غير موجود'], 401);
         }
@@ -72,7 +68,6 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'token' => bin2hex(random_bytes(40)),
         ]);
-        // send confirm email mail
         Mail::to($request->email)->send(new \App\Mail\ConfirmEmail($email_verify->token));
 
         $phone_verify = PhoneVerification::create([

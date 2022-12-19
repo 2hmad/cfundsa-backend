@@ -22,6 +22,7 @@ class Articles extends Model
         'pin',
         'image',
         'article_type',
+        'published',
         'created_at',
         'updated_at',
     ];
