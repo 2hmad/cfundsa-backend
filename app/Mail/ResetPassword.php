@@ -61,7 +61,7 @@ class ResetPassword extends Mailable
     // build the message.
     public function build()
     {
-        return $this->view('forget-password')->with([
+        return $this->view('forget-password')->subject('اعادة تعيين كلمة المرور')->with([
             'newPassword' => $this->newPassword,
         ]);
     }
