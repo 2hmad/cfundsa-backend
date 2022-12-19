@@ -26,7 +26,7 @@ class ArticlesController extends Controller
     }
     public function getAllArticles()
     {
-        $articles = Articles::where('published', 1)->orderBy('id', 'DESC')->get();
+        $articles = Articles::orderBy('id', 'DESC')->get();
         return $articles;
     }
     public function getArticles()
