@@ -11,6 +11,10 @@ class ProjectsController extends Controller
     {
         return Projects::orderBy('id', 'desc')->with('company')->limit(5)->get();
     }
+    public function getAllProjects()
+    {
+        return Projects::orderBy('id', 'desc')->with('company')->get();
+    }
     public function getProjects()
     {
         return Projects::orderBy('id', 'desc')->with('company')->get();

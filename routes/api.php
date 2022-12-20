@@ -66,6 +66,7 @@ Route::get('investment-funds/limited', [InvestmentFundsController::class, 'getLi
 Route::get('investment-fund/{id}', [InvestmentFundsController::class, 'getInvestmentFund']);
 
 Route::get('projects/limited', [ProjectsController::class, 'getLimitedProjects']);
+Route::get('projects', [ProjectsController::class, 'getAllProjects']);
 Route::get('project/{id}', [ProjectsController::class, 'getProject']);
 
 Route::get('appointments', [AppointmentsController::class, 'getAppointments']);
