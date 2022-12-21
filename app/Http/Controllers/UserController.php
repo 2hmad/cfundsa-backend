@@ -221,7 +221,7 @@ class UserController extends Controller
         if ($user !== null) {
             return Notifications::where([
                 ['user_id', $user->id]
-            ])->orderBy('read', 'ASC')->get();
+            ])->orderBy('created_at', 'DESC')->get();
         } else {
             return response()->json([
                 'alert' => 'هذا المستخدم غير موجود'
