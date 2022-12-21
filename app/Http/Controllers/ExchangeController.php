@@ -15,10 +15,10 @@ class ExchangeController extends Controller
         $user = Users::where('token', $request->header('Authorization'))->first();
         $check = ExchangeAds::where([
             ['user_id', $user->id],
-            ['company_id' => $request->company_id],
-            ['type' => $request->type],
-            ['shares_qty' => $request->shares_qty],
-            ['price_availability' => $request->price_availability]
+            ['company_id', $request->company_id],
+            ['type', $request->type],
+            ['shares_qty', $request->shares_qty],
+            ['price_availability', $request->price_availability]
         ])->first();
         if ($check == null) {
             $add = ExchangeAds::create([
