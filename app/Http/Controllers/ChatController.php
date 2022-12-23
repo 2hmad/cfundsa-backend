@@ -42,6 +42,11 @@ class ChatController extends Controller
                 'ad_id' => $request->ad_id,
                 'chat_id' => uniqid()
             ]);
+            PendingDeals::create([
+                'chat_id' => $chat->chat_id,
+                'approved_by_owner' => 0,
+                'approved_by_user' => 0
+            ]);
             return response()->json([
                 'status' => 'success',
                 'chat_id' => $chat->chat_id
