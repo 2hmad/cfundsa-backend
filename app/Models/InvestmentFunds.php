@@ -19,6 +19,7 @@ class InvestmentFunds extends Model
         'fund_duration',
         'total_return',
         'fund_manager',
+        'fund_manager_website',
         'developer',
         'location',
         'details',

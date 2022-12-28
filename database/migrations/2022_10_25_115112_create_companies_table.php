@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('sector');
             $table->string('share_manager_name')->nullable();
             $table->string('share_manager_phone')->nullable();
+            $table->string('share_manager_website')->nullable();
             $table->unsignedFloat('share_price');
             $table->string('company_evaluation');
             $table->text('logo')->nullable();

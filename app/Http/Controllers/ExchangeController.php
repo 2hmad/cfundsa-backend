@@ -43,6 +43,38 @@ class ExchangeController extends Controller
             return response()->json(['alert' => 'هذا الاعلان موجود مسبقا'], 400);
         }
     }
+    public function editExchangeAd(Request $request, $id)
+    {
+        $user = Users::where('token', $request->header('Authorization'))->first();
+        $ad = ExchangeAds::where('id', $id)->first();
+        ExchangeAds::where('id', $id)->update([
+            'company_id' => $request->company_id,
+            'type' => $request->type,
+            'shares_qty' => $request->shares_qty,
+            'price_availability' => $request->price_availability,
+            'price' => $request->price,
+            'notes' => $request->notes,
+        ]);
+        Notifications::create([
+            'user_id' => $user->id,
+            'message' => 'تم تعديل اعلانك الخاص رقم ' . $ad->ad_id . ' من قبل الادارة',
+            'read' => false
+        ]);
+    }
+    public function deleteExchangeAd($id)
+    {
+        $ad = ExchangeAds::where('id', $id)->first();
+        Notifications::create([
+            'user_id' => $ad->user_id,
+            'message' => 'تم حذف اعلانك الخاص رقم ' . $ad->ad_id . ' من قبل الادارة',
+            'read' => false
+        ]);
+        $offers = ExchangeOffers::where('ad_id', $id)->get();
+        foreach ($offers as $offer) {
+            ExchangeOffers::where('id', $offer->id)->delete();
+        }
+        ExchangeAds::where('id', $id)->delete();
+    }
     public function getAdsByUser(Request $request)
     {
         $user = Users::where('token', $request->header('Authorization'))->first();

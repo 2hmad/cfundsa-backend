@@ -20,6 +20,7 @@ use App\Http\Controllers\StatementsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaitingDatesController;
 use App\Models\Companies;
+use App\Models\DealsComplaints;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -181,6 +182,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('projects', [ProjectsController::class, 'createProjects']);
     Route::put('projects/{id}', [ProjectsController::class, 'editProjects']);
     Route::delete('projects/{id}', [ProjectsController::class, 'deleteProjects']);
+
+    Route::put('/edit-exchange-ad/{id}', [ExchangeController::class, 'editExchangeAd']);
+    Route::delete('/exchange-ad/{id}', [ExchangeController::class, 'deleteExchangeAd']);
+
+    Route::get('/deals-complaint', function () {
+        return DealsComplaints::with('deal')->all();
+    });
 
     Route::get('users', [UserController::class, 'getAllUsers']);
     Route::post('users/{id}/verify', [UserController::class, 'verifyUser']);

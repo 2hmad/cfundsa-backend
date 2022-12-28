@@ -16,6 +16,7 @@ class Companies extends Model
         'sector',
         'share_manager_name',
         'share_manager_phone',
+        'share_manager_website',
         'share_price',
         'company_evaluation',
         'logo',

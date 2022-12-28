@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('fund_duration');
             $table->unsignedFloat('total_return');
             $table->text('fund_manager')->nullable();
+            $table->text('fund_manager_website')->nullable();
             $table->text('developer')->nullable();
             $table->text('location')->nullable();
             $table->text('details')->nullable();

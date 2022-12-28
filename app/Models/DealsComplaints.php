@@ -19,4 +19,9 @@ class DealsComplaints extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function deal()
+    {
+        return $this->belongsTo(Deals::class, 'deal_id');
+    }
 }
