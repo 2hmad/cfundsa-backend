@@ -22,6 +22,6 @@ class DealsComplaints extends Model
 
     public function deal()
     {
-        return $this->hasMany(Deals::class, 'id', 'deal_id');
+        return $this->hasOne(Deals::class, 'id', 'deal_id');
     }
 }
