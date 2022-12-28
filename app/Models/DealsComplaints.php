@@ -22,6 +22,6 @@ class DealsComplaints extends Model
 
     public function deal()
     {
-        return $this->belongsToMany(Deals::class, 'id', 'deal_id');
+        return $this->hasMany(Deals::class, 'deal_id', 'id');
     }
 }
