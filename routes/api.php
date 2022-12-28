@@ -187,7 +187,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('/exchange-ad/{id}', [ExchangeController::class, 'deleteExchangeAd']);
 
     Route::get('/deals-complaint', function () {
-        return DealsComplaints::with('deal')->all();
+        return DealsComplaints::with('deal')->get();
     });
 
     Route::get('users', [UserController::class, 'getAllUsers']);
