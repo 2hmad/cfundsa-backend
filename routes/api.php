@@ -190,7 +190,7 @@ Route::group(['prefix' => 'admin'], function () {
         return DealsComplaints::with('deal')->get();
     });
     Route::get('/deal-complaint/{id}', function ($id) {
-        return DealsComplaints::where('id', $id)->with('deal')->fist();
+        return DealsComplaints::where('id', $id)->with('deal')->first();
     });
 
     Route::get('users', [UserController::class, 'getAllUsers']);
