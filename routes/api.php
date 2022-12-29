@@ -192,6 +192,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/deal-complaint/{id}', function ($id) {
         return DealsComplaints::where('id', $id)->with('deal')->first();
     });
+    Route::delete('/deal-complaint/{id}', function ($id) {
+        return DealsComplaints::where('id', $id)->delete();
+    });
 
     Route::get('users', [UserController::class, 'getAllUsers']);
     Route::post('users/{id}/verify', [UserController::class, 'verifyUser']);
