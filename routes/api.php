@@ -189,6 +189,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/deals-complaint', function () {
         return DealsComplaints::with('deal')->get();
     });
+    Route::get('/deal-complaint/{id}', function ($id) {
+        return DealsComplaints::where('id', $id)->with('deal')->fist();
+    });
 
     Route::get('users', [UserController::class, 'getAllUsers']);
     Route::post('users/{id}/verify', [UserController::class, 'verifyUser']);
