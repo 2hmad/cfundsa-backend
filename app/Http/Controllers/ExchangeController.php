@@ -46,7 +46,7 @@ class ExchangeController extends Controller
     public function editExchangeAd(Request $request, $id)
     {
         $ad = ExchangeAds::where('id', $id)->first();
-        $user = Users::where('token', $ad->user_id)->first();
+        $user = Users::where('id', $ad->user_id)->first();
         ExchangeAds::where('id', $id)->update([
             'company_id' => $request->company_id,
             'type' => $request->type,
